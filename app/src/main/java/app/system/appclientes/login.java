@@ -65,7 +65,6 @@ public class login extends AppCompatActivity implements View.OnClickListener
                 if (String.valueOf(info_wifi.getState()).equals("CONNECTED") || String.valueOf(info_datos.getState()).equals("CONNECTED"))
                 {
                     //wifi
-
                     try
                     {
                         Class.forName("net.sourceforge.jtds.jdbc.Driver");
@@ -89,10 +88,8 @@ public class login extends AppCompatActivity implements View.OnClickListener
                             startActivity(i);
                         }
                         else
-                        {
-                            Toast.makeText(login.this, "Contraseña y usuario incorrectos", Toast.LENGTH_LONG).show();
-                            Alerta();
-                        }
+                            Error();
+
                         resultado.close();
                         connection.close();
 
@@ -109,10 +106,7 @@ public class login extends AppCompatActivity implements View.OnClickListener
                     }
                 }
                 else
-                {
                     Alerta();
-                    Toast.makeText(login.this, "Sin acceso a Internet", Toast.LENGTH_LONG).show();
-                }
                 break;
             case R.id.btnSalir:
                 finish();
@@ -120,7 +114,7 @@ public class login extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void Alerta()
+    private void Alerta()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -134,11 +128,29 @@ public class login extends AppCompatActivity implements View.OnClickListener
                         dialog.dismiss();
                     }
                 });
-        builder.setCancelable(true);
+        builder.setCancelable(false);
         builder.show();
     }
 
-    public AlertDialog SQL()
+    private void Error()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("¡Oh no!");
+        builder.setMessage("Contraseña y usuario incorrectos");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        builder.show();
+    }
+
+    private void SQL()
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -152,6 +164,7 @@ public class login extends AppCompatActivity implements View.OnClickListener
                     }
                 });
 
-        return builder.create();
+        builder.setCancelable(false);
+        builder.show();
     }
 }
