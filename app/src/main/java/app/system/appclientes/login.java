@@ -33,12 +33,10 @@ public class login extends AppCompatActivity implements View.OnClickListener
 
         siguiente = (Button) findViewById(R.id.btnIngresar);
         salir = (Button) findViewById(R.id.btnSalir);
-
         usuario = (EditText) findViewById(R.id.txtUsuario);
         contra = (EditText) findViewById(R.id.txtContra);
 
         siguiente.setOnClickListener(this);
-
         salir.setOnClickListener(this);
     }
 
