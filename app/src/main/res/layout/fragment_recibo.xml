@@ -1,0 +1,317 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.system.appclientes.ReciboFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/elotro">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="282dp"
+            android:layout_height="227dp"
+            android:background="@android:drawable/divider_horizontal_dark"
+            android:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.698"
+            app:srcCompat="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/lblTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Generar Recibos"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.074" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="115dp"
+            android:layout_height="66dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.189"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.217">
+
+            <RadioButton
+                android:id="@+id/rbID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID" />
+
+            <RadioButton
+                android:id="@+id/rbYear"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:text="Fecha" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="117dp"
+            android:layout_height="216dp"
+            android:orientation="vertical"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.191"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.708">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="idPago:"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                tools:layout_editor_absoluteX="34dp"
+                tools:layout_editor_absoluteY="405dp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/actionModeSplitBackground" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Situacion"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cuota Fija"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recargo"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tarifa"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Infraestructura"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Otros cobros"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descuento"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGenerar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/spinner_dropdown_background"
+            android:onClick="onClick"
+            android:text="Generar PDF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.943" />
+
+        <LinearLayout
+            android:layout_width="162dp"
+            android:layout_height="215dp"
+            android:orientation="vertical"
+            android:weightSum="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.799"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.709">
+
+            <TextView
+                android:id="@+id/txtidPago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+            <TextView
+                android:id="@+id/txtFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="17/10/2017" />
+
+            <TextView
+                android:id="@+id/txtTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ninguna" />
+
+            <TextView
+                android:id="@+id/txtDescrip"
+                android:layout_width="178dp"
+                android:layout_height="wrap_content"
+                android:text="Aquí van su descripción" />
+
+            <TextView
+                android:id="@+id/txtCFRecibo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+            <TextView
+                android:id="@+id/txtRecargoRecibo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+            <TextView
+                android:id="@+id/txtTarifaRecibo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+
+            <TextView
+                android:id="@+id/txtInfraRecibo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+            <TextView
+                android:id="@+id/txtOtrosC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+            <TextView
+                android:id="@+id/txtDescuento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+            <TextView
+                android:id="@+id/txtTotalRecibo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00.00" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCalcularRecibo"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@android:drawable/spinner_dropdown_background"
+            android:text="Buscar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.827"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.341" />
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.761"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.219">
+
+            <Spinner
+                android:id="@+id/spinnerid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.055" />
+
+            <Spinner
+                android:id="@+id/spinnerYear"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.734"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.266" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

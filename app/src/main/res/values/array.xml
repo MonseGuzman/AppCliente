@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cabecera_tabla">
+        <item>Fila</item>
+        <item>idPago</item>
+        <item>Fecha</item>
+        <item>Tipo</item>
+        <item>Mes Inicial</item>
+        <item>Mes Final</item>
+        <item>Situacion</item>
+        <item>Otros Pagos</item>
+        <item>Descuento</item>
+        <item>Total</item>
+    </string-array>
+</resources>
