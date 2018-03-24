@@ -25,9 +25,11 @@ import java.sql.Statement;
 
  public class MenuPerfil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCalculadora.OnFragmentInteractionListener, FragmentQuejas.OnFragmentInteractionListener,
-         HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, View.OnClickListener {
+         HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener,
+         View.OnClickListener {
 
      Button anterior;
+     private TextView email, id, nombre, domicilio, nExterior, nInterior, Alta, ultimo;
 
      @Override
      protected void onCreate(Bundle savedInstanceState)
@@ -37,14 +39,20 @@ import java.sql.Statement;
          Connection connection;
          String url;
 
-
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_menu_perfil);
          Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
 
          anterior = (Button) findViewById(R.id.btnCerrar);
-         TextView email = (TextView) findViewById(R.id.txtEmail);
+         email = (TextView) findViewById(R.id.txtEmail);
+         id = (TextView) findViewById(R.id.txtID);
+         nombre = (TextView) findViewById(R.id.txtNombre);
+         domicilio = (TextView) findViewById(R.id.txtDomicilio);
+         nExterior = (TextView) findViewById(R.id.txtExterior);
+         nInterior = (TextView) findViewById(R.id.txtInterior);
+         Alta = (TextView) findViewById(R.id.txtAlta);
+         ultimo = (TextView) findViewById(R.id.txtUltimo);
 
          anterior.setOnClickListener(this);
 
@@ -67,57 +75,44 @@ import java.sql.Statement;
              TextView nav_correo = (TextView) hView.findViewById(R.id.txtCorreo);
              nav_correo.setText(dato);
 
-         } catch (Exception ex) {
+         }
+         catch (Exception ex) {
              Toast.makeText(MenuPerfil.this, "3 " + ex.getMessage(), Toast.LENGTH_LONG).show();
          }
 
          try
          {
-             try
+             Class.forName("net.sourceforge.jtds.jdbc.Driver");
+             url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
+             connection = DriverManager.getConnection(url);
+             Statement estatuto = connection.createStatement();
+             String query ="SELECT Cuentas.idCuenta, Cuentas.nombre, Calles.nombreC, Cuentas.numExt, Cuentas.numInt, Cuentas.fechaAlta, Cuentas.ultimoPagoMes, Cuentas.ultimoPagoAño FROM Cuentas INNER JOIN Calles on Cuentas.idCalle = Calles.idCalle WHERE Cuentas.correo = '"+ dato+"'";
+             ResultSet resultado = estatuto.executeQuery(query);
+
+             if (resultado.next())
              {
-                 Class.forName("net.sourceforge.jtds.jdbc.Driver");
-                 url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
-                 connection = DriverManager.getConnection(url);
-                 Statement estatuto = connection.createStatement();
-                 String query ="SELECT Cuentas.idCuenta, Cuentas.nombre, Calles.nombreC, Cuentas.numExt, Cuentas.numInt, Cuentas.fechaAlta, Cuentas.ultimoPagoMes, Cuentas.ultimoPagoAño FROM Cuentas INNER JOIN Calles on Cuentas.idCalle = Calles.idCalle WHERE Cuentas.correo = '"+ dato+"'";
-                 ResultSet resultado = estatuto.executeQuery(query);
+                 //datos
+                 id.setText(String.valueOf(resultado.getInt("idCuenta")));
+                 nombre.setText(resultado.getString("nombre"));
+                 domicilio.setText(resultado.getString("nombreC"));
+                 nExterior.setText(resultado.getString("numExt"));
+                 nInterior.setText(resultado.getString("numInt"));
+                 Alta.setText(String.valueOf(resultado.getDate("fechaAlta")));
+                 ultimo.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
 
-                 if (resultado.next())
-                 {
-                     //parámetros de la lista
-                     TextView id = (TextView) findViewById(R.id.txtID);
-                     TextView nombre = (TextView) findViewById(R.id.txtNombre);
-                     TextView domicilio = (TextView) findViewById(R.id.txtDomicilio);
-                     TextView nExterior = (TextView) findViewById(R.id.txtExterior);
-                     TextView nInterior = (TextView) findViewById(R.id.txtInterior);
-                     TextView Alta = (TextView) findViewById(R.id.txtAlta);
-                     TextView ultimo = (TextView) findViewById(R.id.txtUltimo);
-
-                     //datos
-                     id.setText(String.valueOf(resultado.getInt("idCuenta")));
-                     nombre.setText(resultado.getString("nombre"));
-                     domicilio.setText(resultado.getString("nombreC"));
-                     nExterior.setText(resultado.getString("numExt"));
-                     nInterior.setText(resultado.getString("numInt"));
-                     Alta.setText(String.valueOf(resultado.getDate("fechaAlta")));
-                     ultimo.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
-
-                 }
-                 else
-                 {
-                     Toast.makeText(MenuPerfil.this, "Datos no encontrados", Toast.LENGTH_LONG).show();
-                 }
-                 connection.close();
-
-             }catch (SQLException E) {
-                 E.printStackTrace();
-             }catch (ClassNotFoundException e){
-                 e.printStackTrace();
-             }catch (Exception e){
-                 e.printStackTrace();
              }
-         } catch (Exception e) {
-             Toast.makeText(MenuPerfil.this, "2:" +e.getMessage() , Toast.LENGTH_LONG).show();
+             else
+             {
+                 Toast.makeText(MenuPerfil.this, "Datos no encontrados", Toast.LENGTH_LONG).show();
+             }
+             connection.close();
+
+         }catch (SQLException E) {
+             E.printStackTrace();
+         }catch (ClassNotFoundException e){
+             e.printStackTrace();
+         }catch (Exception e){
+             e.printStackTrace();
          }
      }
 
@@ -203,25 +198,23 @@ import java.sql.Statement;
              TextView email = (TextView) findViewById(R.id.txtEmail);
 
              ActualizarPass fragment = new ActualizarPass();
-             try
-             {
+             try {
                  Bundle args = new Bundle();
                  args.putString("email", email.getText().toString());
                  fragment.setArguments(args);
-             }catch (Exception ex)
-             {
+             } catch (Exception ex) {
                  Toast.makeText(MenuPerfil.this, "Algo paso aquí", Toast.LENGTH_LONG).show();
              }
 
              FragmentManager manager = getSupportFragmentManager();
              manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
              item.setChecked(true);
-         }/*else if (id == R.id.nav_Pago) {
+         }else if (id == R.id.nav_Pago) {
              PagoFragment fragment = new PagoFragment();
              FragmentManager manager = getSupportFragmentManager();
              manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
              item.setChecked(true);
-         }*/
+         }
 
          DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
          drawer.closeDrawer(GravityCompat.START);
