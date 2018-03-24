@@ -91,9 +91,10 @@
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginStart="84dp"
+            android:layout_marginTop="20dp"
             android:text="Forma de Pago"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="259dp" />
+            app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
 
         <Spinner
             android:id="@+id/FormaPagospinner"
@@ -101,23 +102,23 @@
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.107"
             app:layout_constraintStart_toEndOf="@+id/textView21"
-            tools:layout_editor_absoluteY="259dp" />
+            app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
 
         <EditText
             android:id="@+id/PingeditText"
             android:layout_width="232dp"
-            android:layout_height="32dp"
+            android:layout_height="47dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:ems="10"
             android:inputType="numberPassword"
             android:maxLength="16"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.875"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FormaPagospinner" />
 
@@ -125,26 +126,31 @@
             android:id="@+id/textView22"
             android:layout_width="347dp"
             android:layout_height="55dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text="Cuando presione el botón estará aceptando el pago seleccionado. SE LE APLICARÁ LA SITUACIÓN YA ASIGNADA"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Pagarbutton" />
+            app:layout_constraintTop_toBottomOf="@+id/Pagarbutton"
+            app:layout_constraintVertical_bias="0.111" />
 
         <Button
             android:id="@+id/Pagarbutton"
             android:layout_width="147dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@android:drawable/spinner_dropdown_background"
             android:text="Pagar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.762" />
+            app:layout_constraintTop_toBottomOf="@+id/PingeditText"
+            app:layout_constraintVertical_bias="0.228" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
