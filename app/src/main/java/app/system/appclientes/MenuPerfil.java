@@ -29,7 +29,7 @@ import java.sql.Statement;
          View.OnClickListener {
 
      Button anterior;
-     private TextView email, id, nombre, domicilio, nExterior, nInterior, Alta, ultimo;
+     private TextView email, id, nombre, domicilio, nExterior, nInterior, Alta, ultimo, idC;
 
      @Override
      protected void onCreate(Bundle savedInstanceState)
@@ -67,18 +67,12 @@ import java.sql.Statement;
          NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
          navigationView.setNavigationItemSelectedListener(this);
 
-         try {
-             //parámetros para activity
-             email.setText(dato);
+         //parámetros para activity
+         email.setText(dato);
 
-             View hView = navigationView.getHeaderView(0);
-             TextView nav_correo = (TextView) hView.findViewById(R.id.txtCorreo);
-             nav_correo.setText(dato);
-
-         }
-         catch (Exception ex) {
-             Toast.makeText(MenuPerfil.this, "3 " + ex.getMessage(), Toast.LENGTH_LONG).show();
-         }
+         View hView = navigationView.getHeaderView(0);
+         TextView nav_correo = (TextView) hView.findViewById(R.id.txtCorreo);
+         nav_correo.setText(dato);
 
          try
          {
@@ -148,73 +142,65 @@ import java.sql.Statement;
      @Override
      public boolean onNavigationItemSelected(MenuItem item)
      {
-         TextView idC = (TextView) findViewById(R.id.txtID);
-
-         // Handle navigation view item clicks here.
-         int id = item.getItemId();
-
-         if (id == R.id.nav_calculadora) {
-             FragmentCalculadora fragment = new FragmentCalculadora();
-             FragmentManager manager = getSupportFragmentManager();
-             manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-             item.setChecked(true);
-         } else if (id == R.id.nav_quejas) {
-             FragmentQuejas fragment = new FragmentQuejas();
-             FragmentManager manager = getSupportFragmentManager();
-             manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-             item.setChecked(true);
-         } else if (id == R.id.nav_recibos) {
-             ReciboFragment fragment = new ReciboFragment();
-             try
-             {
-                 Bundle args = new Bundle();
-                 args.putString("idCuenta", idC.getText().toString());
-                 fragment.setArguments(args);
-             }catch (Exception e)
-             {
-                 Toast.makeText(MenuPerfil.this, "Algo paso aquí", Toast.LENGTH_LONG).show();
-             }
-             FragmentManager manager = getSupportFragmentManager();
-             manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-             item.setChecked(true);
-         } else if (id == R.id.nav_Historial) {
-             HistorialFragment fragment = new HistorialFragment();
-             try
-             {
-                 Bundle args = new Bundle();
-                 args.putString("idCuenta", idC.getText().toString());
-                 fragment.setArguments(args);
-             }catch (Exception e)
-             {
-                 Toast.makeText(MenuPerfil.this, "Algo paso aquí", Toast.LENGTH_LONG).show();
-             }
-             FragmentManager manager = getSupportFragmentManager();
-             manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-             item.setChecked(true);
-         }else if (id == R.id.nav_Actualizar) {
-             TextView email = (TextView) findViewById(R.id.txtEmail);
-
-             ActualizarPass fragment = new ActualizarPass();
-             try {
-                 Bundle args = new Bundle();
-                 args.putString("email", email.getText().toString());
-                 fragment.setArguments(args);
-             } catch (Exception ex) {
-                 Toast.makeText(MenuPerfil.this, "Algo paso aquí", Toast.LENGTH_LONG).show();
-             }
-
-             FragmentManager manager = getSupportFragmentManager();
-             manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-             item.setChecked(true);
-         }else if (id == R.id.nav_Pago) {
-             PagoFragment fragment = new PagoFragment();
-             FragmentManager manager = getSupportFragmentManager();
-             manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-             item.setChecked(true);
-         }
-
          DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
          drawer.closeDrawer(GravityCompat.START);
+
+         // Handle navigation view item clicks here.
+         FragmentManager manager;
+         Bundle args = new Bundle();
+
+         switch (item.getItemId())
+         {
+             case R.id.nav_calculadora:
+                 FragmentCalculadora fragment = new FragmentCalculadora();
+                 manager = getSupportFragmentManager();
+                 manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
+                 item.setChecked(true);
+                 break;
+             case R.id.nav_quejas:
+                 FragmentQuejas fragmentQuejas = new FragmentQuejas();
+                 manager = getSupportFragmentManager();
+                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentQuejas, fragmentQuejas.getTag()).addToBackStack(null).commit();
+                 item.setChecked(true);
+                 break;
+             case R.id.nav_recibos:
+                 ReciboFragment fragmentRecibo = new ReciboFragment();
+                 args = new Bundle();
+                 args.putString("idCuenta", id.getText().toString());
+                 fragmentRecibo.setArguments(args);
+
+                 manager = getSupportFragmentManager();
+                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentRecibo, fragmentRecibo.getTag()).addToBackStack(null).commit();
+                 item.setChecked(true);
+                 break;
+             case R.id.nav_Historial:
+                 HistorialFragment fragmentHistorial = new HistorialFragment();
+
+                 args = new Bundle();
+                 args.putString("idCuenta", id.getText().toString());
+                 fragmentHistorial.setArguments(args);
+
+                 manager = getSupportFragmentManager();
+                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentHistorial, fragmentHistorial.getTag()).addToBackStack(null).commit();
+                 item.setChecked(true);
+                 break;
+             case  R.id.nav_Actualizar:
+                 ActualizarPass fragmentActualizar = new ActualizarPass();
+
+                 args.putString("email", email.getText().toString());
+                 fragmentActualizar.setArguments(args);
+
+                 manager = getSupportFragmentManager();
+                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentActualizar, fragmentActualizar.getTag()).addToBackStack(null).commit();
+                 item.setChecked(true);
+                 break;
+             case R.id.nav_Pago:
+                 PagoFragment fragmentPago = new PagoFragment();
+                 manager = getSupportFragmentManager();
+                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentPago, fragmentPago.getTag()).addToBackStack(null).commit();
+                 item.setChecked(false);
+                 break;
+         }
          return true;
      }
 
