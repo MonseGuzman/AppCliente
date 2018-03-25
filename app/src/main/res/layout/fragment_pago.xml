@@ -90,9 +90,12 @@
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="84dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:text="Forma de Pago"
+            app:layout_constraintEnd_toStartOf="@+id/FormaPagospinner"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
 
@@ -100,25 +103,52 @@
             android:id="@+id/FormaPagospinner"
             android:layout_width="106dp"
             android:layout_height="25dp"
+            android:layout_marginEnd="76dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
+<<<<<<< HEAD
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.107"
             app:layout_constraintStart_toEndOf="@+id/textView21"
+=======
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+>>>>>>> codificación
             app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
 
         <EditText
             android:id="@+id/PingeditText"
             android:layout_width="232dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FormaPagospinner" />
+<<<<<<< HEAD
             android:layout_height="47dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
+=======
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+>>>>>>> codificación
             android:ems="10"
             android:inputType="numberPassword"
             android:maxLength="16"
             app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
+=======
+            app:layout_constraintHorizontal_bias="0.625"
+>>>>>>> codificación
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FormaPagospinner" />
 
@@ -136,7 +166,7 @@
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Pagarbutton"
-            app:layout_constraintVertical_bias="0.111" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/Pagarbutton"
@@ -145,12 +175,10 @@
             android:layout_marginTop="8dp"
             android:background="@android:drawable/spinner_dropdown_background"
             android:text="Pagar"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PingeditText"
-            app:layout_constraintVertical_bias="0.228" />
+            app:layout_constraintTop_toBottomOf="@+id/PingeditText" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

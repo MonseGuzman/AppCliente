@@ -96,10 +96,9 @@ public class HistorialFragment extends Fragment {
             //cargar la situacion
             String query ="SELECT Pagos.idPago, Pagos.fecha, Pagos.tipo, Agua.mInicial, Agua.mFinal, Situacion.descripcion, Pagos.otros, Agua.descuento, Pagos.total FROM Pagos inner join Agua on Agua.idPago = Pagos.idPago inner join Situacion on Agua.idSituacion = Situacion.idSituacion WHERE Pagos.idCuenta = " + dato;
             ResultSet resultado = estatuto.executeQuery(query);
+            int x = 1;
             while (resultado.next())
             {
-                int x = 1;
-
                 ArrayList<String> elementos = new ArrayList<String>();
                 elementos.add(Integer.toString(x));
                 elementos.add(Integer.toString(resultado.getInt("idPago")));

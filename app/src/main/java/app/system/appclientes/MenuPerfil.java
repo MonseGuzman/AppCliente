@@ -99,12 +99,9 @@ import java.sql.Statement;
                  nInterior.setText(resultado.getString("numInt"));
                  Alta.setText(String.valueOf(resultado.getDate("fechaAlta")));
                  ultimo.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
-
              }
              else
-             {
                  Toast.makeText(MenuPerfil.this, "Datos no encontrados", Toast.LENGTH_LONG).show();
-             }
              connection.close();
 
          }catch (SQLException E) {
