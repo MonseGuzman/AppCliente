@@ -33,6 +33,10 @@ public class FragmentQuejas extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Button enviar;
+    private EditText observaciones;
+    private RadioButton queja, fuga;
+
     private OnFragmentInteractionListener mListener;
 
     public FragmentQuejas() {
@@ -73,29 +77,30 @@ public class FragmentQuejas extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_quejas, container, false);
 
-        Button enviar = (Button) view.findViewById(R.id.btnEnviar);
-        final EditText observaciones = (EditText)view.findViewById(R.id.txtObservacion);
-        final RadioButton queja = (RadioButton)view.findViewById(R.id.rbQueja);
-        final RadioButton fuga = (RadioButton)view.findViewById(R.id.rbFugas);
+        enviar = (Button) view.findViewById(R.id.btnEnviar);
+        observaciones = (EditText)view.findViewById(R.id.txtObservacion);
+        queja = (RadioButton)view.findViewById(R.id.rbQueja);
+        fuga = (RadioButton)view.findViewById(R.id.rbFugas);
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
+                Intent itSend = new Intent(Intent.ACTION_SEND);
+                itSend.setData(Uri.parse("mailto:"));
+                itSend.setType("text/plain");
+
+                //correo a enviar
+                itSend.putExtra(Intent.EXTRA_EMAIL,new String[] {"andreaguzman.lopez23@gmail.com"});
+                //mensaje
+                itSend.putExtra(Intent.EXTRA_TEXT, observaciones.getText().toString());
+
                 if (queja.isChecked())
                 {
-                    Intent itSend = new Intent(Intent.ACTION_SEND);
-                    itSend.setData(Uri.parse("mailto:"));
-                    itSend.setType("text/plain");
-                    //correo a enviar
-                    itSend.putExtra(Intent.EXTRA_EMAIL,new String[] {"andreaguzman.lopez23@gmail.com"});
-                    // asunto
-                    itSend.putExtra(Intent.EXTRA_SUBJECT, "Asunto: Queja");
-                    //mensaje
-                    itSend.putExtra(Intent.EXTRA_TEXT, observaciones.getText().toString());
-                    //enviar
                     try
                     {
+                        // asunto
+                        itSend.putExtra(Intent.EXTRA_SUBJECT, "Asunto: Queja");
                         //enviar
                         startActivity(itSend);
                     }
@@ -104,19 +109,12 @@ public class FragmentQuejas extends Fragment {
                         Toast.makeText(getContext(), "No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();
                     }
                 }
-                if(fuga.isChecked())
+                else if(fuga.isChecked())
                 {
-                    Intent itSend = new Intent(Intent.ACTION_SEND);
-                    itSend.setType("text/plain");
-                    //correo a enviar
-                    itSend.putExtra(Intent.EXTRA_EMAIL, new String [] {"andreaguzman.lopez23@gmail.com"});
-                    // asunto
-                    itSend.putExtra(Intent.EXTRA_SUBJECT, "Asunto: Fugas");
-                    //mensaje
-                    itSend.putExtra(Intent.EXTRA_TEXT, observaciones.getText().toString());
-
                     try
                     {
+                        // asunto
+                        itSend.putExtra(Intent.EXTRA_SUBJECT, "Asunto: Fugas");
                         //enviar
                         startActivity(itSend);
                     }
