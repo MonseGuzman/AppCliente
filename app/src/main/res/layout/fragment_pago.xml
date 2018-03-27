@@ -107,19 +107,7 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
-<<<<<<< HEAD
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.107"
-            app:layout_constraintStart_toEndOf="@+id/textView21"
-=======
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
->>>>>>> codificación
-            app:layout_constraintTop_toBottomOf="@+id/TotalPagartextView" />
+
 
         <EditText
             android:id="@+id/PingeditText"
@@ -128,27 +116,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FormaPagospinner" />
-<<<<<<< HEAD
-            android:layout_height="47dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-=======
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
->>>>>>> codificación
-            android:ems="10"
-            android:inputType="numberPassword"
-            android:maxLength="16"
-            app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-=======
-            app:layout_constraintHorizontal_bias="0.625"
->>>>>>> codificación
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/FormaPagospinner" />
 
