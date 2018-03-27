@@ -55,6 +55,7 @@
                 android:id="@+id/rbQueja"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="Quejas" />
 
             <RadioButton
