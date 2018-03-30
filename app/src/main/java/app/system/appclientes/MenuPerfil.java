@@ -10,8 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,20 +19,21 @@ import android.widget.Toast;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+ import java.sql.Statement;
 
  public class MenuPerfil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCalculadora.OnFragmentInteractionListener, FragmentQuejas.OnFragmentInteractionListener,
          HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener,
          View.OnClickListener {
 
-     Button anterior;
+     private Button anterior;
      private TextView email, id, nombre, domicilio, nExterior, nInterior, Alta, ultimo, idC;
 
      @Override
      protected void onCreate(Bundle savedInstanceState)
      {
+         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
          StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
          StrictMode.setThreadPolicy(policy);
          Connection connection;
@@ -95,14 +95,10 @@ import java.sql.Statement;
                  ultimo.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
              }
              else
-                 Toast.makeText(MenuPerfil.this, "Datos no encontrados", Toast.LENGTH_LONG).show();
+                 Toast.makeText(this, "Datos no encontrados", Toast.LENGTH_LONG).show();
              connection.close();
 
-         }catch (SQLException E) {
-             E.printStackTrace();
-         }catch (ClassNotFoundException e){
-             e.printStackTrace();
-         }catch (Exception e){
+         } catch (Exception e){
              e.printStackTrace();
          }
      }
@@ -129,13 +125,6 @@ import java.sql.Statement;
                  super.onBackPressed();
              }
          }
-     }
-
-     @Override
-     public boolean onCreateOptionsMenu(Menu menu) {
-         // Inflate the menu; this adds items to the action bar if it is present.
-         getMenuInflater().inflate(R.menu.menu_perfil, menu);
-         return true;
      }
 
      @SuppressWarnings("StatementWithEmptyBody")

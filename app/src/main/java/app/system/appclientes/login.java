@@ -43,73 +43,65 @@ public class login extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Connection connection;
-        String url;
+        String username = usuario.getText().toString();
+        String password = contra.getText().toString();
 
-        switch (v.getId())
-        {
-            case R.id.btnIngresar:
+        if (validacion(username, password)) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            Connection connection;
+            String url;
 
-                ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            switch (v.getId()) {
+                case R.id.btnIngresar:
 
-                NetworkInfo info_wifi = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                NetworkInfo info_datos = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                    ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo info_wifi = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                    NetworkInfo info_datos = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-                String username = usuario.getText().toString();
-                String password = contra.getText().toString();
-
-                if (String.valueOf(info_wifi.getState()).equals("CONNECTED") || String.valueOf(info_datos.getState()).equals("CONNECTED"))
-                {
-                    //wifi
-                    try
+                    if (String.valueOf(info_wifi.getState()).equals("CONNECTED") || String.valueOf(info_datos.getState()).equals("CONNECTED"))
                     {
-                        Class.forName("net.sourceforge.jtds.jdbc.Driver");
-                        url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
-                        connection = DriverManager.getConnection(url);
-                        Statement estatuto = connection.createStatement();
-                        String query ="SELECT * FROM Cuentas WHERE correo = '"+ username+"' and password = '"+ password +"'";
-                        ResultSet resultado = estatuto.executeQuery(query);
-
-                        if (resultado.next())
+                        //wifi
+                        try
                         {
-                            Toast.makeText(login.this, "Login Correcto", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(login.this, MenuPerfil.class);
-                            try {
-                                i.putExtra("usuario", usuario.getText().toString());
-                            }catch (Exception ex)
+                            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+                            url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
+                            connection = DriverManager.getConnection(url);
+                            Statement estatuto = connection.createStatement();
+                            String query = "SELECT * FROM Cuentas WHERE correo = '" + username + "' and password = '" + password + "'";
+                            ResultSet resultado = estatuto.executeQuery(query);
+
+                            if (resultado.next())
                             {
-                                Toast.makeText(login.this, ex.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                            finish();
-                            startActivity(i);
+                                Toast.makeText(login.this, "Login Correcto", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(login.this, MenuPerfil.class);
+                                i.putExtra("usuario", usuario.getText().toString());
+                                startActivity(i);
+                                finish();
+
+                            } else
+                                Error();
+
+                            resultado.close();
+                            connection.close();
+
+                        } catch (SQLException E) {
+                            E.printStackTrace();
+                            SQL();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.i("ahh", "error" + e.getMessage());
                         }
-                        else
-                            Error();
-
-                        resultado.close();
-                        connection.close();
-
-                    }catch (SQLException E){
-                        E.printStackTrace();
-                        SQL();
-                    }catch (ClassNotFoundException e){
-                        e.printStackTrace();
+                    } else
                         Alerta();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        Log.i("ahh", "error" + e.getMessage());
-                        Alerta();
-                    }
-                }
-                else
-                    Alerta();
-                break;
-            case R.id.btnSalir:
-                finish();
-                break;
+                    break;
+                case R.id.btnSalir:
+                    finish();
+                    break;
+            }
         }
+        else
+            Toast.makeText(this, "Ingrese datos válidos", Toast.LENGTH_LONG).show();
     }
 
     private void Alerta()
@@ -164,5 +156,17 @@ public class login extends AppCompatActivity implements View.OnClickListener
 
         builder.setCancelable(false);
         builder.show();
+    }
+
+    private boolean validacion(String user, String pass)
+    {
+        if(user.isEmpty() && pass.isEmpty())
+            return false;
+        else if (user.isEmpty())
+            return false;
+        else if (pass.isEmpty())
+            return false;
+
+        return true;
     }
 }
