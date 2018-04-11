@@ -23,10 +23,9 @@ import java.sql.ResultSet;
 
  public class MenuPerfil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCalculadora.OnFragmentInteractionListener, FragmentQuejas.OnFragmentInteractionListener,
-         HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener,
-         View.OnClickListener {
+         HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener
+ {
 
-     private Button anterior;
      private TextView email, id, nombre, domicilio, nExterior, nInterior, Alta, ultimo, idC;
 
      @Override
@@ -44,7 +43,6 @@ import java.sql.ResultSet;
          Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
 
-         anterior = (Button) findViewById(R.id.btnCerrar);
          email = (TextView) findViewById(R.id.txtEmail);
          id = (TextView) findViewById(R.id.txtID);
          nombre = (TextView) findViewById(R.id.txtNombre);
@@ -53,8 +51,6 @@ import java.sql.ResultSet;
          nInterior = (TextView) findViewById(R.id.txtInterior);
          Alta = (TextView) findViewById(R.id.txtAlta);
          ultimo = (TextView) findViewById(R.id.txtUltimo);
-
-         anterior.setOnClickListener(this);
 
          //parámetro enviando del login
          String dato = getIntent().getExtras().getString("usuario");
@@ -100,15 +96,6 @@ import java.sql.ResultSet;
 
          } catch (Exception e){
              e.printStackTrace();
-         }
-     }
-
-     @Override
-     public void onClick(View v) {
-         switch (v.getId()) {
-             case R.id.btnCerrar:
-                 finish();
-                 break;
          }
      }
 
@@ -188,6 +175,9 @@ import java.sql.ResultSet;
                  manager = getSupportFragmentManager();
                  manager.beginTransaction().replace(R.id.drawer_layout, fragmentPago, fragmentPago.getTag()).addToBackStack(null).commit();
                  item.setChecked(false);
+                 break;
+             case R.id.nav_Cerrar:
+                 finish();
                  break;
          }
          return true;

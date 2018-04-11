@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="app.system.appclientes.FragmentCalculadora">
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_menu_perfil">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -16,369 +14,370 @@
         android:background="@drawable/elotro">
 
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="256dp"
-            android:layout_height="181dp"
-            android:src="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.951" />
-
-        <TextView
-            android:id="@+id/lblDetalle"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_weight="1"
-            android:text="Detalles del Pago"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.557"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.611" />
-
         <TextView
             android:id="@+id/lblTitulo"
             android:layout_width="294dp"
             android:layout_height="37dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="0.24"
             android:text="Calculadora de Pagos"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primaryDarkColor"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.058" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblDatos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             android:text="Seleccione los datos correctos"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.224"
+            app:layout_constraintHorizontal_bias="0.157"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.168" />
+            app:layout_constraintTop_toBottomOf="@+id/lblTitulo" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="323dp"
+            android:layout_height="86dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblDatos">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Situacion"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.13"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.263" />
+
+                <Spinner
+                    android:id="@+id/spinnerSituacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_weight="0.83"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.541"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.261" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Año"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.114"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.348" />
+
+                <Spinner
+                    android:id="@+id/spinnerTarifa"
+                    android:layout_width="177dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.346" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="153dp"
+                    android:layout_height="wrap_content"
+                    android:text="Meses a Pagar"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.156"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.426" />
+
+                <Spinner
+                    android:id="@+id/spinnerMes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.17"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.581"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.426" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/lblDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:text="Detalles del Pago"
+            android:textColor="@android:color/black"
+            app:layout_constraintHorizontal_bias="0.543"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCalcular" />
 
         <Button
             android:id="@+id/btnCalcular"
             android:layout_width="101dp"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
             android:background="@android:drawable/spinner_dropdown_background"
             android:text="Calcular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.879"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+        <TableLayout
+            android:layout_width="281dp"
+            android:layout_height="173dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.869"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.522" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.619"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblDetalle">
 
-        <LinearLayout
-            android:layout_width="183dp"
-            android:layout_height="92dp"
-            android:orientation="vertical"
-            android:weightSum="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.815"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.315">
+            <TableRow
+                android:layout_width="229dp"
+                android:layout_height="wrap_content">
 
-            <Spinner
-                android:id="@+id/spinnerSituacion"
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:layout_weight="0.83"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.541"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.261" />
+                <TextView
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tarifa"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.449"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.178" />
 
-            <Spinner
-                android:id="@+id/spinnerTarifa"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.346" />
+                <TextView
+                    android:id="@+id/txtTarifaCalculadora"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLength="6"
+                    android:text="00.00"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.815"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.207" />
+            </TableRow>
 
-            <Spinner
-                android:id="@+id/spinnerMes"
-                android:layout_width="match_parent"
-                android:layout_height="27dp"
-                android:layout_weight="0.17"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.581"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.426" />
-        </LinearLayout>
+            <TableRow
+                android:layout_width="229dp"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="132dp"
-            android:layout_height="89dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.123"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.319">
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Infraestructura"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.255"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.346" />
 
-            <TextView
-                android:id="@+id/lblSiuacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Situacion"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.13"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.263" />
+                <TextView
+                    android:id="@+id/txtInfraCalculadora"
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:text="00.00"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.815"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.351" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lblYear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Año"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.114"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.348" />
+            <TableRow
+                android:layout_width="229dp"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/lblMeses"
-                android:layout_width="153dp"
-                android:layout_height="wrap_content"
-                android:text="Meses a Pagar"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.156"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.426" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cuota Fija"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.374"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.659" />
 
-        <LinearLayout
-            android:layout_width="157dp"
-            android:layout_height="171dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.317"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.911">
+                <TextView
+                    android:id="@+id/txtCFCalculadora"
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:text="00.00"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.815"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.656" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lblTarifa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Tarifa"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.449"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.178" />
+            <TableRow
+                android:layout_width="229dp"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/lblInf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Infraestructura"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.255"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.346" />
+                <TextView
+                    android:layout_width="189dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Recargo"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.404"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.498" />
 
-            <TextView
-                android:id="@+id/lblCF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cuota Fija"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.374"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.659" />
+                <TextView
+                    android:id="@+id/txtRecargoCalculadora"
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:text="00.00"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.815"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lblRecargo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Recargo"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.404"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.498" />
+            <TableRow
+                android:layout_width="229dp"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/llDescuento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Descuento"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                <TextView
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:text="Descuento"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/lblTotal"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="Total a Pagar"
-                android:textAlignment="center"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.221"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.856" />
+                <TextView
+                    android:id="@+id/txtDescuentoCalculadora"
+                    android:layout_width="94dp"
+                    android:layout_height="match_parent"
+                    android:text="00.00"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp" />
+            </TableRow>
 
-        </LinearLayout>
+            <TableRow
+                android:layout_width="229dp"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="104dp"
-            android:layout_height="160dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.842"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.914">
+                <TextView
+                    android:layout_width="191dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total a Pagar"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.221"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.856" />
 
-            <TextView
-                android:id="@+id/txtTarifaCalculadora"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:maxLength="6"
-                android:text="00.00"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.815"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.207" />
-
-            <TextView
-                android:id="@+id/txtInfraCalculadora"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:text="00.00"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.815"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.351" />
-
-            <TextView
-                android:id="@+id/txtCFCalculadora"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:text="00.00"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.815"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.656" />
-
-            <TextView
-                android:id="@+id/txtRecargoCalculadora"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:text="00.00"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.815"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtDescuentoCalculadora"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="00.00"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/txtTotalCalculadora"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:text="00.00"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.815"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.834" />
-
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txtTotalCalculadora"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="00.00"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.815"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.834" />
+            </TableRow>
+        </TableLayout>
 
     </android.support.constraint.ConstraintLayout>
 

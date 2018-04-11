@@ -32,9 +32,9 @@ public class FragmentCalculadora extends Fragment implements View.OnClickListene
     private String mParam1;
     private String mParam2;
 
-    Spinner Sptarifa, SpSituacion, SpMeses;
-    Button calcular;
-    TextView CFcalculadora, TARCalculadora, INFCalculadora, RecargoCalculadora, TotalCalculadora, DescuentoCalculadora ;
+    private Spinner Sptarifa, SpSituacion, SpMeses;
+    private Button calcular;
+    private TextView CFcalculadora, TARCalculadora, INFCalculadora, RecargoCalculadora, TotalCalculadora, DescuentoCalculadora ;
 
     ArrayList<String> datos = new ArrayList<String>();
     ArrayList<String> datos2 = new ArrayList<String>();
@@ -245,7 +245,6 @@ public class FragmentCalculadora extends Fragment implements View.OnClickListene
             url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
             connection = DriverManager.getConnection(url);
             Statement estatuto = connection.createStatement();
-
 
             //cargar la situacion
             String query ="SELECT * FROM Situacion";

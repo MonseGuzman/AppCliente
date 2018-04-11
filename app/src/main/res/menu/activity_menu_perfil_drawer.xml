@@ -26,6 +26,10 @@
             android:id="@+id/nav_Pago"
             android:icon="@drawable/money"
             android:title="Realizar Pago" />
+        <item
+            android:id="@+id/nav_Cerrar"
+            android:icon="@drawable/icon_salir"
+            android:title="Cerrar Sesión" />
     </group>
 
 </menu>
