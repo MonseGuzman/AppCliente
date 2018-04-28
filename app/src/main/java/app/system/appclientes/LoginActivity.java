@@ -5,14 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -21,30 +22,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class login extends AppCompatActivity implements View.OnClickListener
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private Button siguiente, salir;
-    private EditText usuario, contra;
+    private Button btnIngresar, btnSalir;
+    private EditText etUsuario, etContra;
+    private Switch swRecordarme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        siguiente = (Button) findViewById(R.id.btnIngresar);
-        salir = (Button) findViewById(R.id.btnSalir);
-        usuario = (EditText) findViewById(R.id.txtUsuario);
-        contra = (EditText) findViewById(R.id.txtContra);
+        btnIngresar = (Button) findViewById(R.id.btnIngresar);
+        btnSalir = (Button) findViewById(R.id.btnSalir);
+        etUsuario = (EditText) findViewById(R.id.etUsuario);
+        etContra = (EditText) findViewById(R.id.etContra);
+        swRecordarme = (Switch) findViewById(R.id.swRecordarme);
 
-        siguiente.setOnClickListener(this);
-        salir.setOnClickListener(this);
+        btnIngresar.setOnClickListener(this);
+        btnSalir.setOnClickListener(this);
+
+        this.setTitle("Login");
     }
 
     @Override
     public void onClick(View v)
     {
-        String username = usuario.getText().toString();
-        String password = contra.getText().toString();
+        String username = etUsuario.getText().toString();
+        String password = etContra.getText().toString();
 
         if (validacion(username, password)) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -52,7 +57,8 @@ public class login extends AppCompatActivity implements View.OnClickListener
             Connection connection;
             String url;
 
-            switch (v.getId()) {
+            switch (v.getId())
+            {
                 case R.id.btnIngresar:
 
                     ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -61,7 +67,6 @@ public class login extends AppCompatActivity implements View.OnClickListener
 
                     if (String.valueOf(info_wifi.getState()).equals("CONNECTED") || String.valueOf(info_datos.getState()).equals("CONNECTED"))
                     {
-                        //wifi
                         try
                         {
                             Class.forName("net.sourceforge.jtds.jdbc.Driver");
@@ -73,27 +78,28 @@ public class login extends AppCompatActivity implements View.OnClickListener
 
                             if (resultado.next())
                             {
-                                Toast.makeText(login.this, "Login Correcto", Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(login.this, MenuPerfil.class);
-                                i.putExtra("usuario", usuario.getText().toString());
+                                Toast.makeText(this, "Login Correcto", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(this, MenuPerfil.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                i.putExtra("usuario", username);
                                 startActivity(i);
                                 finish();
 
                             } else
-                                Error();
+                                Alerta("¡Oh no!", "Contraseña y usuario incorrectos");
 
                             resultado.close();
                             connection.close();
 
                         } catch (SQLException E) {
                             E.printStackTrace();
-                            SQL();
+                            Alerta("Sin acceso a la Base de Datos", "Error en el servidor, intentelo más tardes");
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.i("ahh", "error" + e.getMessage());
                         }
                     } else
-                        Alerta();
+                        Alerta("Sin acceso a Internet","Favor de conectarse a una red ya sea WiFi o datos móviles");
                     break;
                 case R.id.btnSalir:
                     finish();
@@ -104,30 +110,12 @@ public class login extends AppCompatActivity implements View.OnClickListener
             Toast.makeText(this, "Ingrese datos válidos", Toast.LENGTH_LONG).show();
     }
 
-    private void Alerta()
+    private void Alerta(String titulo, String mensaje)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Sin acceso a Internet");
-        builder.setMessage("Favor de conectarse a una red ya sea WiFi o datos móviles ");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        dialog.dismiss();
-                    }
-                });
-        builder.setCancelable(false);
-        builder.show();
-    }
-
-    private void Error()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("¡Oh no!");
-        builder.setMessage("Contraseña y usuario incorrectos");
+        builder.setTitle(titulo);
+        builder.setMessage(mensaje);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
         {
             @Override
@@ -136,24 +124,6 @@ public class login extends AppCompatActivity implements View.OnClickListener
                 dialog.dismiss();
             }
         });
-        builder.setCancelable(false);
-        builder.show();
-    }
-
-    private void SQL()
-    {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Sin acceso a la Base de Datos").setMessage("Error en el servidor, intentelo más tardes")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        dialog.dismiss();
-                    }
-                });
-
         builder.setCancelable(false);
         builder.show();
     }

@@ -14,10 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".login"
-            android:label="System-App"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +23,7 @@
         </activity>
         <activity
             android:name=".MenuPerfil"
-            android:label="@string/title_activity_menu_perfil"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_menu_perfil"></activity>
     </application>
 
 </manifest>
