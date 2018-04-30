@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/grupo"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_calculadora"
             android:icon="@android:drawable/ic_menu_edit"
             android:title="Calculadora de Pagos" />
         <item
-            android:id="@+id/nav_quejas"
-            android:icon="@android:drawable/ic_dialog_email"
-            android:title="Fugas y/o Quejas" />
+            android:id="@+id/nav_Historial"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:title="Historial de Pagos" />
         <item
             android:id="@+id/nav_recibos"
             android:icon="@android:drawable/ic_menu_save"
             android:title="Generar Recibos" />
         <item
-            android:id="@+id/nav_Historial"
-            android:icon="@android:drawable/ic_menu_sort_by_size"
-            android:title="Historial de Pagos" />
-        <item
-            android:id="@+id/nav_Actualizar"
-            android:icon="@android:drawable/ic_lock_idle_lock"
-            android:title="Cambiar Contraseña" />
-        <item
             android:id="@+id/nav_Pago"
             android:icon="@drawable/money"
             android:title="Realizar Pago" />
         <item
-            android:id="@+id/nav_Cerrar"
-            android:icon="@drawable/icon_salir"
-            android:title="Cerrar Sesión" />
+            android:id="@+id/nav_quejas"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="Fugas y/o Quejas"/>
+        <group
+            android:id="@+id/grupo1">
+
+            <item
+                android:id="@+id/nav_Actualizar"
+                android:icon="@android:drawable/ic_lock_idle_lock"
+                android:title="Cambiar Contraseña" />
+            <item
+                android:id="@+id/nav_Cerrar"
+                android:title="Cerrar Sesión" />
+        </group>
     </group>
 
 </menu>

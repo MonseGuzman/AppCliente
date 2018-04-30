@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import app.system.appclientes.app.Tabla;
+
 
 /**
  * A simple {@link Fragment} subclass.

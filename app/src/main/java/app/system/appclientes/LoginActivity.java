@@ -3,12 +3,14 @@ package app.system.appclientes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +24,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnIngresar, btnSalir;
     private EditText etUsuario, etContra;
     private Switch swRecordarme;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +44,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnIngresar.setOnClickListener(this);
         btnSalir.setOnClickListener(this);
 
-        this.setTitle("Login");
+        this.setTitle("Iniciar Sesion");
+        preferences = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
+        setCredencialsIfExits();
+    }
+
+    private void setCredencialsIfExits()
+    {
+        String email = preferences.getString("email", "");
+        String pass = preferences.getString("contraseña", "");
+
+        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass))
+        {
+            etUsuario.setText(email);
+            etContra.setText(pass);
+        }
+    }
+
+    private void guradarPreferencias(String email, String contra) {
+        if (swRecordarme.isChecked()) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("email", email);
+            editor.putString("contraseña", contra);
+            editor.commit(); // empieza a guardar los put*
+            editor.apply(); //guarda todos los cambios aunque no se guraden todos
+        }
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         String username = etUsuario.getText().toString();
         String password = etContra.getText().toString();
 
-        if (validacion(username, password)) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            Connection connection;
-            String url;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection;
+        String url;
 
-            switch (v.getId())
-            {
-                case R.id.btnIngresar:
-
+        switch (v.getId()) {
+            case R.id.btnIngresar:
+                if (validacion(username, password))
+                {
                     ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                     NetworkInfo info_wifi = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                     NetworkInfo info_datos = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -76,15 +100,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String query = "SELECT * FROM Cuentas WHERE correo = '" + username + "' and password = '" + password + "'";
                             ResultSet resultado = estatuto.executeQuery(query);
 
-                            if (resultado.next())
-                            {
-                                Toast.makeText(this, "Login Correcto", Toast.LENGTH_SHORT).show();
+                            if (resultado.next()) {
                                 Intent i = new Intent(this, MenuPerfil.class);
-                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //cierra esta actividad
                                 i.putExtra("usuario", username);
                                 startActivity(i);
-                                finish();
-
+                                guradarPreferencias(username, password);
                             } else
                                 Alerta("¡Oh no!", "Contraseña y usuario incorrectos");
 
@@ -93,34 +114,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         } catch (SQLException E) {
                             E.printStackTrace();
-                            Alerta("Sin acceso a la Base de Datos", "Error en el servidor, intentelo más tardes");
+                            Alerta("Sin acceso a la Base de Datos", "Error en el servidor, inténtelo más tarde");
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.i("ahh", "error" + e.getMessage());
                         }
                     } else
-                        Alerta("Sin acceso a Internet","Favor de conectarse a una red ya sea WiFi o datos móviles");
-                    break;
-                case R.id.btnSalir:
-                    finish();
-                    break;
-            }
+                        Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
+                } else
+                    Toast.makeText(this, "Ingrese datos válidos", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.btnSalir:
+                finish();
+                break;
         }
-        else
-            Toast.makeText(this, "Ingrese datos válidos", Toast.LENGTH_LONG).show();
     }
 
-    private void Alerta(String titulo, String mensaje)
-    {
+    private void Alerta(String titulo, String mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(titulo);
         builder.setMessage(mensaje);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-        {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
@@ -128,9 +145,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         builder.show();
     }
 
-    private boolean validacion(String user, String pass)
-    {
-        if(user.isEmpty() && pass.isEmpty())
+    private boolean validacion(String user, String pass) {
+        if (user.isEmpty() && pass.isEmpty())
             return false;
         else if (user.isEmpty())
             return false;
