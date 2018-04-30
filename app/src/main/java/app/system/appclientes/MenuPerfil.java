@@ -60,9 +60,7 @@ import java.sql.Statement;
          ultimo = (TextView) findViewById(R.id.txtUltimo);
          navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-         if (!conectado())
-             Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
-         else
+         if (conectado())
          {
              getSupportActionBar().setIcon(R.drawable.menu);
 
@@ -117,6 +115,8 @@ import java.sql.Statement;
              //setSupportActionBar(toolbar);
              mDrawerToggle.syncState();
          }
+         else
+            Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
      }
 
      @Override
