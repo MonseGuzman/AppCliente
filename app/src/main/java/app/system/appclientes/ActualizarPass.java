@@ -20,22 +20,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ActualizarPass.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ActualizarPass#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ActualizarPass extends Fragment
 {
-    private ProgressDialog pDialog;
-
     private Button cambiar;
     private EditText contra, nueva;
-    String dato;
+    private String usuario;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,7 +67,7 @@ public class ActualizarPass extends Fragment
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         Bundle args = getArguments();
-        dato = args.getString("email", "mailNulo");
+        usuario = args.getString("email", "mailNulo");
         //mailNulo sería el valor por defecto en caso de que args no contenga una
 
     }
@@ -88,20 +77,18 @@ public class ActualizarPass extends Fragment
     {
         View v = inflater.inflate(R.layout.fragment_actualizar_pass, container, false);
         cambiar = (Button) v.findViewById(R.id.btnCambiar);
+        contra = (EditText) v.findViewById(R.id.txtActual);
+        nueva = (EditText) v.findViewById(R.id.txtNueva);
+
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                new Actualizar().execute();
-                getActivity().getFragmentManager().popBackStack();
-
+                Actualizar();
             }
         });
 
-        contra = (EditText) v.findViewById(R.id.txtActual);
-        nueva = (EditText) v.findViewById(R.id.txtNueva);
-
-
+        contra.setFocusable(true);
         // Inflate the layout for this fragment
         return v;
     }
@@ -130,85 +117,63 @@ public class ActualizarPass extends Fragment
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
-    class Actualizar extends AsyncTask<String, String, String> {
+    private void Actualizar ()
+    {
+        String password = contra.getText().toString();
+        String newPassword = nueva.getText().toString();
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(getContext());
-            pDialog.setMessage("Cargando datos...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... args) {
-            String username = dato;
-            String password = contra.getText().toString();
-            String nueva2 = nueva.getText().toString();
-
+        if (validacion(newPassword, password)) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
             StrictMode.setThreadPolicy(policy);
             Connection connection;
             String url;
 
-            try
-            {
+            try {
                 Class.forName("net.sourceforge.jtds.jdbc.Driver");
                 url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
                 connection = DriverManager.getConnection(url);
                 Statement estatuto = connection.createStatement();
 
-                String query ="SELECT * FROM Cuentas WHERE correo = '"+ username +"' AND password = '"+ password +"'";
+                String query = "SELECT * FROM Cuentas WHERE correo = '" + usuario + "' AND password = '" + password + "'";
                 ResultSet resultado = estatuto.executeQuery(query);
 
                 if (resultado.next())
                 {
+                    //REVISAR LUEGO
+                    Toast.makeText(getContext(), "La contraseña ha sido cambiada éxitosamente", Toast.LENGTH_SHORT).show();
                     //actualizar
-                    String query2 ="UPDATE Cuentas SET password = '"+ nueva2 +"' WHERE correo = '"+ username +"'";
+                    String query2 = "UPDATE Cuentas SET password = '" + newPassword + "' WHERE correo = '" + usuario + "'";
                     estatuto.executeQuery(query2);
-
                 }
                 else
-                {
-                    Toast.makeText(getContext(), "La contraseña no coincide", Toast.LENGTH_LONG).show();
-                }
+                    Toast.makeText(getContext(), "La contraseña no coincide", Toast.LENGTH_SHORT).show();
+
+                resultado.close();
                 connection.close();
 
-            }catch (SQLException E)
-            {
+            } catch (SQLException E) {
                 E.printStackTrace();
-            }catch (ClassNotFoundException e){
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            return null;
         }
+        else
+            Toast.makeText(getContext(), "Revise sus datos ingresados", Toast.LENGTH_SHORT).show();
+    }
 
-        protected void onPostExecute(String file_url) {
-            // descartar el diálogo una vez que el producto ha sido eliminado
-            pDialog.dismiss();
-            if (file_url != null) {
-                Toast.makeText(getContext(), file_url, Toast.LENGTH_LONG).show();
-            }
-        }
+    private boolean validacion(String nueva, String anterior)
+    {
+        if (nueva.isEmpty() || anterior.isEmpty())
+            return false;
+        else if (nueva.equals(anterior))
+            return false;
+        return true;
     }
 }

@@ -17,7 +17,7 @@
             android:layout_height="49dp"
             android:layout_marginTop="16dp"
             android:text="Pago del Recibo"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/primaryDarkColor"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"

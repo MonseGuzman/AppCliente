@@ -1,4 +1,4 @@
-package app.system.appclientes;
+package app.system.appclientes.app;
 
 import android.app.Activity;
 import android.content.res.Resources;

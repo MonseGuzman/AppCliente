@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Generar Recibos"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/primaryDarkColor"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="idPago:"
                 android:textAlignment="textEnd"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/primaryColor"
                 tools:layout_editor_absoluteX="34dp"
                 tools:layout_editor_absoluteY="405dp" />
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tipo"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="Situacion"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:text="Cuota Fija"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:text="Recargo"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tarifa"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:text="Infraestructura"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:text="Otros cobros"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:text="Descuento"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/primaryColor" />
         </LinearLayout>
 
         <Button

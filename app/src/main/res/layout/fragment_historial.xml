@@ -23,7 +23,7 @@
             android:layout_height="40dp"
             android:text="Historial de Pagos"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/primaryDarkColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.555"
