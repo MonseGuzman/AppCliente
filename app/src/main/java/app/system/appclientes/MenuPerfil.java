@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,8 @@ import java.sql.Statement;
          HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener
  {
 
-     private TextView email, id, nombre, domicilio, nExterior, nInterior, Alta, ultimo, idC;
+     private TextView tvAlta_Perfil, tvUltimo_Perfil, tvID_Perfil;
+     private EditText etNombre_Perfil, etDomicilio_Perfil, etExterior_Perfil, etInterior_Perfil, etEmail_Perfil;
      private NavigationView navigationView;
      private ActionBarDrawerToggle mDrawerToggle;
      private SharedPreferences preferences;
@@ -50,19 +52,19 @@ import java.sql.Statement;
          setContentView(R.layout.activity_menu_perfil);
 
          //DECLARACIÓN
-         email = (TextView) findViewById(R.id.txtEmail);
-         id = (TextView) findViewById(R.id.txtID);
-         nombre = (TextView) findViewById(R.id.txtNombre);
-         domicilio = (TextView) findViewById(R.id.txtDomicilio);
-         nExterior = (TextView) findViewById(R.id.txtExterior);
-         nInterior = (TextView) findViewById(R.id.txtInterior);
-         Alta = (TextView) findViewById(R.id.txtAlta);
-         ultimo = (TextView) findViewById(R.id.txtUltimo);
+         etEmail_Perfil = (EditText) findViewById(R.id.etEmail_Perfil);
+         tvID_Perfil = (TextView) findViewById(R.id.tvID_Perfil);
+         etNombre_Perfil = (EditText) findViewById(R.id.etNombre_Perfil);
+         etDomicilio_Perfil = (EditText) findViewById(R.id.etDomicilio_Perfil);
+         etExterior_Perfil = (EditText) findViewById(R.id.etExterior_Perfil);
+         etInterior_Perfil = (EditText) findViewById(R.id.etInterior_Perfil);
+         tvAlta_Perfil = (TextView) findViewById(R.id.tvAlta_Perfil);
+         tvUltimo_Perfil = (TextView) findViewById(R.id.tvUltimo_Perfil);
          navigationView = (NavigationView) findViewById(R.id.nav_view);
 
          if (conectado())
          {
-             getSupportActionBar().setIcon(R.drawable.menu);
+             //getSupportActionBar().setIcon(R.drawable.menu);
 
              StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
              StrictMode.setThreadPolicy(policy);
@@ -73,7 +75,7 @@ import java.sql.Statement;
              preferences = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
              //parámetro enviando del login
              String dato = getIntent().getExtras().getString("usuario");
-             email.setText(dato);
+             etEmail_Perfil.setText(dato);
              //seleccion de items
              navigationView.setNavigationItemSelectedListener(this);
              //correo en header
@@ -91,32 +93,31 @@ import java.sql.Statement;
 
                  if (resultado.next()) {
                      //datos
-                     id.setText(String.valueOf(resultado.getInt("idCuenta")));
-                     nombre.setText(resultado.getString("nombre"));
-                     domicilio.setText(resultado.getString("nombreC"));
-                     nExterior.setText(resultado.getString("numExt"));
-                     nInterior.setText(resultado.getString("numInt"));
-                     Alta.setText(String.valueOf(resultado.getDate("fechaAlta")));
-                     ultimo.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
+                     tvID_Perfil.setText(String.valueOf(resultado.getInt("idCuenta")));
+                     etNombre_Perfil.setText(resultado.getString("nombre"));
+                     etDomicilio_Perfil.setText(resultado.getString("nombreC"));
+                     etExterior_Perfil.setText(resultado.getString("numExt"));
+                     etInterior_Perfil.setText(resultado.getString("numInt"));
+                     tvAlta_Perfil.setText(String.valueOf(resultado.getDate("fechaAlta")));
+                     tvUltimo_Perfil.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
                  } else
                      Toast.makeText(this, "Datos no encontrados", Toast.LENGTH_LONG).show();
                  connection.close();
              } catch (Exception e) {
                  e.printStackTrace();
              }
-
-
-             //EN PRUEBA
-             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-             mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-             drawer.addDrawerListener(mDrawerToggle);
-             //setSupportActionBar(toolbar);
-             mDrawerToggle.syncState();
          }
          else
             Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
+
+         //EN PRUEBA
+         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+         mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+         drawer.addDrawerListener(mDrawerToggle);
+         //setSupportActionBar(toolbar);
+         mDrawerToggle.syncState();
      }
 
      @Override
@@ -211,7 +212,7 @@ import java.sql.Statement;
              case R.id.nav_recibos:
                  ReciboFragment fragmentRecibo = new ReciboFragment();
                  args = new Bundle();
-                 args.putString("idCuenta", id.getText().toString());
+                 args.putString("idCuenta", tvID_Perfil.getText().toString());
                  fragmentRecibo.setArguments(args);
 
                  manager = getSupportFragmentManager();
@@ -222,7 +223,7 @@ import java.sql.Statement;
                  HistorialFragment fragmentHistorial = new HistorialFragment();
 
                  args = new Bundle();
-                 args.putString("idCuenta", id.getText().toString());
+                 args.putString("idCuenta", tvID_Perfil.getText().toString());
                  fragmentHistorial.setArguments(args);
 
                  manager = getSupportFragmentManager();
@@ -232,7 +233,7 @@ import java.sql.Statement;
              case  R.id.nav_Actualizar:
                  ActualizarPass fragmentActualizar = new ActualizarPass();
 
-                 args.putString("email", email.getText().toString());
+                 args.putString("email", etEmail_Perfil.getText().toString());
                  fragmentActualizar.setArguments(args);
 
                  manager = getSupportFragmentManager();
@@ -251,6 +252,24 @@ import java.sql.Statement;
                  break;
          }
          return true;
+     }
+
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+         MenuInflater menuInflater = getMenuInflater();
+         menuInflater.inflate(R.menu.edit_menu_activity, menu);
+         return true;
+     }
+
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+         switch (item.getItemId())
+         {
+             case R.id.nav_edit:
+                 return true;
+             default:
+                return super.onOptionsItemSelected(item);
+         }
      }
 
      @Override
