@@ -36,7 +36,7 @@ import java.sql.Statement;
 
  public class MenuPerfil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCalculadora.OnFragmentInteractionListener, FragmentQuejas.OnFragmentInteractionListener,
-         HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarPass.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener
+         HistorialFragment.OnFragmentInteractionListener, ReciboFragment.OnFragmentInteractionListener, ActualizarFragment.OnFragmentInteractionListener, PagoFragment.OnFragmentInteractionListener
  {
 
      private TextView tvAlta_Perfil, tvUltimo_Perfil, tvID_Perfil;
@@ -101,7 +101,7 @@ import java.sql.Statement;
                      tvAlta_Perfil.setText(String.valueOf(resultado.getDate("fechaAlta")));
                      tvUltimo_Perfil.setText(String.valueOf(resultado.getInt("ultimoPagoMes")) + "/" + String.valueOf(resultado.getInt("ultimoPagoAño")));
                  } else
-                     Toast.makeText(this, "Datos no encontrados", Toast.LENGTH_LONG).show();
+                     Toast.makeText(this, R.string.sinDatos, Toast.LENGTH_LONG).show();
                  connection.close();
              } catch (Exception e) {
                  e.printStackTrace();
@@ -231,7 +231,7 @@ import java.sql.Statement;
                  item.setChecked(true);
                  break;
              case  R.id.nav_Actualizar:
-                 ActualizarPass fragmentActualizar = new ActualizarPass();
+                 ActualizarFragment fragmentActualizar = new ActualizarFragment();
 
                  args.putString("email", etEmail_Perfil.getText().toString());
                  fragmentActualizar.setArguments(args);
