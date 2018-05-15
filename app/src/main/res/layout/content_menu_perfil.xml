@@ -5,85 +5,74 @@
     android:id="@+id/Contenedor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tioclara"
+    android:background="#F8F9F9"
     tools:context="app.system.appclientes.MenuPerfil"
     tools:showIn="@layout/app_bar_menu_perfil">
 
     <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="336dp"
-        android:layout_height="320dp"
-        android:layout_marginBottom="8dp"
-        android:background="#F8F9F9"
-        android:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/imageView5"
+        android:layout_width="109dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="330dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icono"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="165dp" />
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ID"
-            android:textAlignment="center"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="173dp" />
-
-        <TextView
-            android:id="@+id/tvID_Perfil"
-            android:layout_width="143dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <TableLayout
         android:id="@+id/tableLayout3"
-        android:layout_width="312dp"
-        android:layout_height="94dp"
+        android:layout_width="344dp"
+        android:layout_height="290dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TableRow>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/icono"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="165dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="ID"
+                android:textAlignment="textStart"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="99dp"
+                tools:layout_editor_absoluteY="173dp" />
+
+            <TextView
+                android:id="@+id/tvID_Perfil"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Nombre"
@@ -124,75 +113,42 @@
                 android:inputType="textPersonName" />
         </TableRow>
 
-    </TableLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="107dp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="317dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout3">
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="#"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="#"
-            android:textAlignment="center"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="324dp" />
+            <EditText
+                android:id="@+id/etExterior_Perfil"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_weight="19"
+                android:enabled="false"
+                android:inputType="number" />
 
-        <EditText
-            android:id="@+id/etExterior_Perfil"
-            android:layout_width="18dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="number" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="No. Interior"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="58dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="No. Interior"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="138dp"
-            tools:layout_editor_absoluteY="352dp" />
+            <EditText
+                android:id="@+id/etInterior_Perfil"
 
-        <EditText
-            android:id="@+id/etInterior_Perfil"
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/tableLayout2"
-        android:layout_width="309dp"
-        android:layout_height="101dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.0">
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="number" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -227,18 +183,11 @@
             android:layout_height="25dp">
 
             <TextView
-                android:id="@+id/lblAlta"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha Alta"
                 android:textColor="@color/primaryDarkColor"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.113"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.793" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvAlta_Perfil"
@@ -255,23 +204,16 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/lblUltimo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Último Pago"
                 android:textColor="@color/primaryDarkColor"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.787" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvUltimo_Perfil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -280,15 +222,5 @@
 
     </TableLayout>
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="109dp"
-        android:layout_height="105dp"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>
