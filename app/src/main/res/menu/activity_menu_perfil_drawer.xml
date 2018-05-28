@@ -25,7 +25,7 @@
             android:title="Fugas y/o Quejas"/>
     </group>
 
-    <item android:title="Configuración">
+    <item android:title="Cuenta">
         <menu>
             <item
                 android:id="@+id/nav_Actualizar"

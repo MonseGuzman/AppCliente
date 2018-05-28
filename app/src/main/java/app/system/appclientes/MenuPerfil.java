@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,7 +43,6 @@ import java.sql.Statement;
      private TextView tvAlta_Perfil, tvUltimo_Perfil, tvID_Perfil;
      private EditText etNombre_Perfil, etDomicilio_Perfil, etExterior_Perfil, etInterior_Perfil, etEmail_Perfil;
      private NavigationView navigationView;
-     private ActionBarDrawerToggle mDrawerToggle;
      private DrawerLayout drawer_Layout;
      private Toolbar toolbar;
      private SharedPreferences preferences;
@@ -84,7 +84,7 @@ import java.sql.Statement;
              preferences = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
              //parámetro enviando del login
              String dato = preferences.getString("email", "");
-             //etEmail_Perfil.setText(dato);
+             etEmail_Perfil.setText(dato);
              //seleccion de items
              navigationView.setNavigationItemSelectedListener(this);
              //correo en header
@@ -118,7 +118,6 @@ import java.sql.Statement;
          }
          else
             Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
-
      }
 
      @Override
@@ -175,69 +174,60 @@ import java.sql.Statement;
      @Override
      public boolean onNavigationItemSelected(MenuItem item)
      {
-         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-         drawer.closeDrawer(GravityCompat.START);
-
-         // Handle navigation view item clicks here.
-         FragmentManager manager;
+         Fragment fragment = null;
+         boolean fragmentSeleccionado = false;
          Bundle args = new Bundle();
 
          switch (item.getItemId())
          {
              case R.id.nav_calculadora:
-                 FragmentCalculadora fragment = new FragmentCalculadora();
-                 manager = getSupportFragmentManager();
-                 manager.beginTransaction().replace(R.id.drawer_layout, fragment, fragment.getTag()).addToBackStack(null).commit();
-                 item.setChecked(true);
+                 fragment = new FragmentCalculadora();
+                 fragmentSeleccionado = true;
                  break;
              case R.id.nav_quejas:
-                 FragmentQuejas fragmentQuejas = new FragmentQuejas();
-                 manager = getSupportFragmentManager();
-                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentQuejas, fragmentQuejas.getTag()).addToBackStack(null).commit();
-                 item.setChecked(true);
+                 fragment = new FragmentQuejas();
+                 fragmentSeleccionado = true;
                  break;
              case R.id.nav_recibos:
-                 ReciboFragment fragmentRecibo = new ReciboFragment();
+                 fragment = new ReciboFragment();
                  args = new Bundle();
                  args.putString("idCuenta", tvID_Perfil.getText().toString());
-                 fragmentRecibo.setArguments(args);
+                 fragment.setArguments(args);
 
-                 manager = getSupportFragmentManager();
-                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentRecibo, fragmentRecibo.getTag()).addToBackStack(null).commit();
-                 item.setChecked(true);
+                 fragmentSeleccionado = true;
                  break;
              case R.id.nav_Historial:
-                 HistorialFragment fragmentHistorial = new HistorialFragment();
+                 fragment = new HistorialFragment();
 
                  args = new Bundle();
                  args.putString("idCuenta", tvID_Perfil.getText().toString());
-                 fragmentHistorial.setArguments(args);
+                 fragment.setArguments(args);
 
-                 manager = getSupportFragmentManager();
-                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentHistorial, fragmentHistorial.getTag()).addToBackStack(null).commit();
-                 item.setChecked(true);
+                 fragmentSeleccionado = true;
                  break;
              case  R.id.nav_Actualizar:
-                 ActualizarFragment fragmentActualizar = new ActualizarFragment();
-
+                 fragment = new ActualizarFragment();
                  args.putString("email", etEmail_Perfil.getText().toString());
-                 fragmentActualizar.setArguments(args);
+                 fragment.setArguments(args);
 
-                 manager = getSupportFragmentManager();
-                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentActualizar, fragmentActualizar.getTag()).addToBackStack(null).commit();
-                 item.setChecked(true);
+                 fragmentSeleccionado = true;
                  break;
              case R.id.nav_Pago:
-                 PagoFragment fragmentPago = new PagoFragment();
-                 manager = getSupportFragmentManager();
-                 manager.beginTransaction().replace(R.id.drawer_layout, fragmentPago, fragmentPago.getTag()).addToBackStack(null).commit();
-                 item.setChecked(false);
+                 fragment = new PagoFragment();
+                 fragmentSeleccionado = true;
                  break;
              case R.id.nav_Cerrar:
                  preferences.edit().clear().apply();
                  logOut();
                  break;
          }
+
+         if(fragmentSeleccionado)
+         {
+             cambiarFragment(fragment, item);
+             drawer_Layout.closeDrawers();
+         }
+
          return true;
      }
 
@@ -260,6 +250,13 @@ import java.sql.Statement;
              default:
                 return super.onOptionsItemSelected(item);
          }
+     }
+
+     private void cambiarFragment(Fragment fragment, MenuItem item)
+     {
+         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout, fragment).commit();
+         item.setChecked(true);
+         getSupportActionBar().setTitle(item.getTitle());
      }
 
      @Override
