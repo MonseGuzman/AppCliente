@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -25,9 +26,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button btnIngresar, btnSalir;
+    private Button btnIngresar;
     private EditText etUsuario, etContra;
-    private Switch swRecordarme;
+    private CheckBox chRecordarme;
     private SharedPreferences preferences;
 
     @Override
@@ -36,13 +37,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
-        btnSalir = (Button) findViewById(R.id.btnSalir);
         etUsuario = (EditText) findViewById(R.id.etUsuario);
         etContra = (EditText) findViewById(R.id.etContra);
-        swRecordarme = (Switch) findViewById(R.id.swRecordarme);
+        chRecordarme = (CheckBox) findViewById(R.id.chRecordarme);
 
         btnIngresar.setOnClickListener(this);
-        btnSalir.setOnClickListener(this);
 
         this.setTitle("Iniciar Sesion");
         preferences = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
@@ -62,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void guradarPreferencias(String email, String contra) {
-        if (swRecordarme.isChecked()) {
+        if (chRecordarme.isChecked()) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("email", email);
             editor.putString("contraseña", contra);
@@ -123,10 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
                 } else
                     Toast.makeText(this, "Ingrese datos válidos", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.btnSalir:
-                finish();
-                break;
+            break;
         }
     }
 

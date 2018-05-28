@@ -21,7 +21,7 @@
         <activity
             android:name=".MenuPerfil"
             android:label="@string/title_activity_menu_perfil"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/ParaMenu"/>
         <activity
             android:name=".Splash.SplashActivity"
             android:theme="@style/splashScreen">
