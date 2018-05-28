@@ -43,6 +43,8 @@ import java.sql.Statement;
      private EditText etNombre_Perfil, etDomicilio_Perfil, etExterior_Perfil, etInterior_Perfil, etEmail_Perfil;
      private NavigationView navigationView;
      private ActionBarDrawerToggle mDrawerToggle;
+     private DrawerLayout drawer_Layout;
+     private Toolbar toolbar;
      private SharedPreferences preferences;
 
      @Override
@@ -61,6 +63,13 @@ import java.sql.Statement;
          tvAlta_Perfil = (TextView) findViewById(R.id.tvAlta_Perfil);
          tvUltimo_Perfil = (TextView) findViewById(R.id.tvUltimo_Perfil);
          navigationView = (NavigationView) findViewById(R.id.nav_view);
+         drawer_Layout = (DrawerLayout)findViewById(R.id.drawer_layout);
+         toolbar = (Toolbar)findViewById(R.id.toolbar);
+
+         //EN PRUEBA
+         setSupportActionBar(toolbar);
+         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_nav_view);
+         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
          if (conectado())
          {
@@ -74,8 +83,8 @@ import java.sql.Statement;
              //PREFERENCIAS
              preferences = getSharedPreferences("Preferencias", Context.MODE_PRIVATE);
              //parámetro enviando del login
-             String dato = getIntent().getExtras().getString("usuario");
-             etEmail_Perfil.setText(dato);
+             String dato = preferences.getString("email", "");
+             //etEmail_Perfil.setText(dato);
              //seleccion de items
              navigationView.setNavigationItemSelectedListener(this);
              //correo en header
@@ -110,29 +119,7 @@ import java.sql.Statement;
          else
             Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
 
-         //EN PRUEBA
-         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-         mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-         drawer.addDrawerListener(mDrawerToggle);
-         //setSupportActionBar(toolbar);
-         mDrawerToggle.syncState();
      }
-
-     @Override
-     protected void onPostCreate(Bundle savedInstanceState) {
-         super.onPostCreate(savedInstanceState);
-         // Sync the toggle state after onRestoreInstanceState has occurred.
-         mDrawerToggle.syncState();
-     }
-
-     @Override
-     public void onConfigurationChanged(Configuration newConfig) {
-         super.onConfigurationChanged(newConfig);
-         mDrawerToggle.onConfigurationChanged(newConfig);
-     }
-
 
      @Override
      public void onBackPressed() {
@@ -266,6 +253,9 @@ import java.sql.Statement;
          switch (item.getItemId())
          {
              case R.id.nav_edit:
+                 return true;
+             case android.R.id.home:
+                 drawer_Layout.openDrawer(GravityCompat.START);
                  return true;
              default:
                 return super.onOptionsItemSelected(item);

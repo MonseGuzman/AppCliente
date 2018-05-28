@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -75,6 +76,7 @@ public class ActualizarFragment extends Fragment
                 connection = DriverManager.getConnection(url);
                 Statement estatuto = connection.createStatement();
 
+                PreparedStatement comm;
                 String query = "SELECT * FROM Cuentas WHERE correo = '" + usuario + "' AND password = '" + password + "'";
                 ResultSet resultado = estatuto.executeQuery(query);
 
@@ -84,7 +86,8 @@ public class ActualizarFragment extends Fragment
                     Toast.makeText(getContext(), "La contraseña ha sido cambiada éxitosamente", Toast.LENGTH_SHORT).show();
                     //actualizar
                     String query2 = "UPDATE Cuentas SET password = '" + newPassword + "' WHERE correo = '" + usuario + "'";
-                    estatuto.executeQuery(query2);
+                    comm = connection.prepareStatement(query2);
+                    comm.executeQuery();
                 }
                 else
                     Toast.makeText(getContext(), "La contraseña no coincide", Toast.LENGTH_SHORT).show();
