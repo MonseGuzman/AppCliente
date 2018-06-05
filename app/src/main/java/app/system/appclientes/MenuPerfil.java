@@ -4,24 +4,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
-
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActionBarContainer;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -66,15 +60,12 @@ import java.sql.Statement;
          drawer_Layout = (DrawerLayout)findViewById(R.id.drawer_layout);
          toolbar = (Toolbar)findViewById(R.id.toolbar);
 
-         //EN PRUEBA
          setSupportActionBar(toolbar);
          getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_nav_view);
          getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
          if (conectado())
          {
-             //getSupportActionBar().setIcon(R.drawable.menu);
-
              StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
              StrictMode.setThreadPolicy(policy);
              Connection connection;
@@ -94,6 +85,7 @@ import java.sql.Statement;
              //extracción de la bd *
              try {
                  Class.forName("net.sourceforge.jtds.jdbc.Driver");
+                 //url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
                  url = "jdbc:jtds:sqlserver://bdAguaPotable.mssql.somee.com;databaseName=bdAguaPotable;user=SYSTEM-APP_SQLLogin_1;password=pn8akqjwxc";
                  connection = DriverManager.getConnection(url);
                  Statement estatuto = connection.createStatement();
@@ -118,21 +110,6 @@ import java.sql.Statement;
          }
          else
             Alerta("Sin acceso a Internet", "Favor de conectarse a una red ya sea WiFi o datos móviles");
-     }
-
-     @Override
-     public void onBackPressed() {
-         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-         if (drawer.isDrawerOpen(GravityCompat.START)) {
-             drawer.closeDrawer(GravityCompat.START);
-         } else {
-             if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-                 getSupportFragmentManager().popBackStack();
-             } else {
-                 super.onBackPressed();
-             }
-         }
      }
 
      //MÉTODOS PROPIOS
@@ -254,9 +231,9 @@ import java.sql.Statement;
 
      private void cambiarFragment(Fragment fragment, MenuItem item)
      {
-         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout, fragment).commit();
+         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout, fragment).addToBackStack(null).commit();
          item.setChecked(true);
-         getSupportActionBar().setTitle(item.getTitle());
+         //getSupportActionBar().setTitle(item.getTitle());
      }
 
      @Override

@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="Iniciar Sesión">
+            android:label="Iniciar Sesión"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".MenuPerfil"
