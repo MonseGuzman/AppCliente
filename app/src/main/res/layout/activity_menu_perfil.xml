@@ -5,7 +5,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/AppTheme.NoActionBar"
     android:fitsSystemWindows="true">
 
     <include
@@ -34,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemIconTint="@color/secondaryColor"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_menu_perfil"
         app:menu="@menu/activity_menu_perfil_drawer" />

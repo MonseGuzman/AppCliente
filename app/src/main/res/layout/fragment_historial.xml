@@ -1,65 +1,57 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/elotro"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:gravity="center"
     tools:context="app.system.appclientes.HistorialFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="331dp"
+        android:layout_height="40dp"
+        android:text="Historial de Pagos"
+        android:textAlignment="center"
+        android:textColor="@color/primaryDarkColor"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.059" />
 
-    <LinearLayout
-        android:id="@+id/layoutTabla"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
+        android:id="@+id/scrollvertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:scrollbars="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="331dp"
-            android:layout_height="40dp"
-            android:text="Historial de Pagos"
-            android:textAlignment="center"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.555"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.059" />
-
-        <ScrollView
-            android:id="@+id/scrollvertical"
+        <HorizontalScrollView
+            android:id="@+id/scrollhorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:scrollbars="vertical">
+            android:scrollbars="horizontal">
 
-            <HorizontalScrollView
-                android:id="@+id/scrollhorizontal"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:scrollbars="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TableLayout
+                    android:id="@+id/tabla"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"/>
 
-                    <TableLayout
-                        android:id="@+id/tabla"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></TableLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
+            </LinearLayout>
 
-        </ScrollView>
+        </HorizontalScrollView>
 
-    </LinearLayout>
+    </ScrollView>
 
-</FrameLayout>
+</LinearLayout>
