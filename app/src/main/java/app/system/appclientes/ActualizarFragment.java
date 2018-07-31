@@ -18,9 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ActualizarFragment extends Fragment
 {
     private Button btCambiar_Actualizar;
@@ -59,7 +56,7 @@ public class ActualizarFragment extends Fragment
         return v;
     }
 
-    private void Actualizar ()
+    private void Actualizar()
     {
         String password = etActual_Actualizar.getText().toString();
         String newPassword = etNueva_Actualizar.getText().toString();
